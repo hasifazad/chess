@@ -1,0 +1,18 @@
+.chat-body {
+    overflow-y: scroll;
+    height: 90%;
+}
+
+.chat-body::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+.chat-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Handle */
+.chat-body::-webkit-scrollbar-thumb {
+    background: #888;
+}

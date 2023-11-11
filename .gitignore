@@ -1,0 +1,10 @@
+/client/node_modules
+/server/node_modules
+/socket-chat/node_modules
+/socket-chess/node_modules
+
+
+/client/.env
+/server/.env
+
+/client/dist

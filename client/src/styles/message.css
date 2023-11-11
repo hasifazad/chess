@@ -1,0 +1,17 @@
+.message-body-left {
+    padding: 3px;
+    background-color: antiquewhite;
+    margin: 4px;
+    border-radius: 5px;
+    /* max-width: 70%; */
+    float: end;
+}
+
+.message-body-right {
+    padding: 3px;
+    background-color: rgb(160, 210, 230);
+    margin: 4px;
+    border-radius: 5px;
+    /* max-width: 70%; */
+    float: start;
+}
