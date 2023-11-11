@@ -24,7 +24,7 @@ app.use("/api/game", gameRoute);
 app.use("/api/chat", chatRoute);
 
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 
 app.listen(PORT, () => {
     console.log(`server listening to the ports ${PORT}`);
