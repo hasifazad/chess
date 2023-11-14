@@ -6,6 +6,7 @@ import GameLoading from './GameLoading'
 import { UserDetailsContext } from '../context/UserContext'
 import { useParams } from 'react-router-dom'
 import api from '../Axios';
+import { Grid } from '@mui/material'
 
 
 function ChessBoard() {

@@ -6,7 +6,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { FormControl } from '@mui/material';
+import { FormControl, Typography } from '@mui/material';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import { UserDetailsContext } from '../context/UserContext';
@@ -15,6 +15,7 @@ export default function PlayWithLink({ ...params }) {
     let { user } = useContext(UserDetailsContext)
 
     const [gameCode, setGameCode] = useState('')
+    const [error, setError] = useState(false)
 
 
     const navigate = useNavigate()
@@ -34,6 +35,8 @@ export default function PlayWithLink({ ...params }) {
                     navigate(`/game/${gameCode.split('-')[0]}-w-${gameCode.split('-')[2]}`)
             }
         }).catch((error) => {
+            // console.log('errorrr');
+            setError(true)
             console.log(error);
         })
     }
@@ -51,20 +54,22 @@ export default function PlayWithLink({ ...params }) {
     const handleClose = () => {
         setOpen(false);
     };
-
+    console.log(error);
     return (
         <>
             <Button onClick={handleClickOpen}>
                 PLAY WITH CODE
             </Button>
-            <Dialog open={open} onClose={handleClose}>
+            <Dialog open={open} >
                 {/* <DialogTitle>Subscribe</DialogTitle> */}
                 <DialogContent sx={{ paddingBottom: 0 }}>
                     <DialogContentText>
                         Paste your code here
                     </DialogContentText>
+                    {error ? <Typography color='red' fontWeight="light" fontSize='12px'>Invalid Link</Typography> : null}
                     <FormControl sx={{ minWidth: 120 }}>
-                        <TextField id="outlined-basic" size='small' variant="outlined" value={gameCode} onChange={(e) => { setGameCode(e.target.value) }} />
+                        <TextField error={error ? true : false} id="outlined-basic" size='small' variant="outlined" value={gameCode}
+                            onChange={(e) => { setGameCode(e.target.value); setError(false) }} />
                     </FormControl>
                 </DialogContent>
                 <DialogActions>

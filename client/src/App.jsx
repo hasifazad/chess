@@ -7,6 +7,7 @@ import UserContext from './context/UserContext'
 import PrivateRoute from './PrivateRoute'
 import Signup from './components/Signup'
 import ChatPage from './pages/ChatPage'
+import StartGamePage from './pages/StartGamePage'
 
 
 
@@ -21,6 +22,7 @@ function App() {
               <Route element={<HomePage />} path='/' />
               <Route element={<GamePage />} path='/game/:gameId' />
               <Route element={<ChatPage />} path='/chat' />
+              <Route element={<StartGamePage />} path='/startgame' />
             </Route>
             <Route element={<Login />} path='/login' />
             <Route element={<Signup />} path='/signup' />

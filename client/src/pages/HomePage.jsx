@@ -13,13 +13,16 @@ function HomePage() {
     const handleChat = () => {
         navigate('/chat')
     }
+    const handleStartGame = () => {
+        navigate('/startgame')
+    }
 
     return (
         <>
             <Grid container direction='row' justifyContent='center' alignItems='center' height='80vh'>
                 <Grid item>
                     <Stack width={200}>
-                        <Button disabled>start game</Button>
+                        <Button onClick={handleStartGame}>start game</Button>
                         <PlayWithLink />
                         <CreateGame />
                         <Button onClick={handleChat}>social</Button>

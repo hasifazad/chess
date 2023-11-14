@@ -39,26 +39,20 @@ module.exports = {
     //@descrp -- to add second player
     //@route -- PUT /api/game
     //@access -- private
-    createGameLink: (req, res) => {
+    createGameLink: async (req, res, next) => {
         console.log(req.body);
         try {
-            Game.findOne({ _id: req.body.gameCode, game_played: false }).then((response) => {
+            let response = await Game.findOne({ _id: req.body.gameCode, game_played: false });
+            if (response == null) { throw new Error('invalid link') }
+
+            Game.updateOne({ _id: req.body.gameCode }, { $set: { 'second_player.id': req.body.userId, game_played: true } }).then((response) => {
                 console.log(response);
-                if (response != null) {
-                    Game.updateOne({ _id: req.body.gameCode }, { $set: { 'second_player.id': req.body.userId, game_played: true } }).then((response) => {
-                        console.log(response);
-                        res.json({ message: 'Successfully added second player', status: true })
-                    }).catch((err) => {
-                        console.log(err);
-                    })
-                } else {
-                    throw new Error('')
-                }
+                res.json({ message: 'Successfully added second player', status: true })
             }).catch((err) => {
-                console.log(err);
+                next(new Error('sadfas'))
             })
         } catch (error) {
-
+            next(error)
         }
     },
 

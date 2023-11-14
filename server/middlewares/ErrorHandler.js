@@ -1,7 +1,7 @@
 const { constants } = require("../constants.js")
 
 const errorHandler = (err, req, res, next) => {
-    ncosole.log('error');
+    console.log('error');
     const statusCode = res.statusCode || 500;
 
     switch (statusCode) {
@@ -21,7 +21,8 @@ const errorHandler = (err, req, res, next) => {
             res.json({ title: 'Server Error', message: err.message, stackTrace: err.stack })
             break;
         default:
-            console.log(err);
+            res.json({ title: 'Server Error', message: err.message, stackTrace: err.stack })
+            // console.log(err);
             break;
     }
 }

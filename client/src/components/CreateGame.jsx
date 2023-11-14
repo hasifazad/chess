@@ -73,7 +73,7 @@ export default function CreateGame() {
             <Button onClick={handleClickOpen}>
                 CREATE GAME
             </Button>
-            <Dialog open={open} onClose={handleClose}>
+            <Dialog open={open}>
                 <DialogTitle>Create a Game</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
