@@ -23,8 +23,12 @@ app.use("/api/user", userRoute);
 app.use("/api/game", gameRoute);
 app.use("/api/chat", chatRoute);
 
+app.get('/', (req, res) => {
+    res.json({ message: "hello world" })
+})
 
 const PORT = process.env.PORT || 3002;
+
 
 app.listen(PORT, () => {
     console.log(`server listening to the ports ${PORT}`);
