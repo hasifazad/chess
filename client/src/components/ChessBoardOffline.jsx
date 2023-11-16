@@ -14,14 +14,23 @@ function ChessBoardOffline() {
   const [turn, setTurn] = useState('w')
 
   const drop = (sourceSquare, targetSquare) => {
-
     const move = {
       from: sourceSquare,
       to: targetSquare,
     }
+    let mov = game.current.move(move)
     // console.log(game.current.fen());
     // const gameCopy = game.current;
-    let mov = game.current.move(move)
+    if (game.current.isGameOver()) {
+      if (mov?.color == 'w') {
+        console.log('whitewins');
+      } else {
+        console.log('blackwins');
+      }
+    }
+
+
+    console.log('game', game.current.isGameOver());
     setPosition(game.current.fen())
     setMoves([...moves, mov])
     setTurn(game.current.turn())

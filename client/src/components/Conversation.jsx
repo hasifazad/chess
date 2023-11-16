@@ -10,7 +10,7 @@ function Conversation({ conv, handleConv }) {
             <List sx={{ pt: 0 }}>
                 {conv.map((data) => (
                     <ListItem disableGutters key={data._id}>
-                        <ListItemButton onClick={() => { handleConv(data._id) }}>
+                        <ListItemButton onClick={() => { handleConv(data._id, data.username) }}>
                             <ListItemAvatar>
                                 <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
                                     <PersonIcon />

@@ -5,7 +5,7 @@ import { Typography } from '@mui/material';
 
 function Loading() {
     return (
-        <Box sx={{ position: 'relative', display: 'inline-flex' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} height='80vh'>
             <Typography>Loading...</Typography>
             <CircularProgress />
         </Box>

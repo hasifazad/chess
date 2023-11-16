@@ -7,6 +7,7 @@ import { UserDetailsContext } from '../context/UserContext'
 import { useParams } from 'react-router-dom'
 import api from '../Axios';
 import { Grid } from '@mui/material'
+import GameOverMessage from './GameOverMessage'
 
 
 function ChessBoard() {
@@ -25,6 +26,8 @@ function ChessBoard() {
     const [gameLoading, setGameLoading] = useState(true);
     const [nextMove, setNextMove] = useState(false);
     const [turn, setTurn] = useState('w')
+    const [gameOver, setGameOver] = useState(false)
+    const [gameOverData, setGameOverData] = useState()
 
     function drop(sourceSquare, targetSquare) {
         if (nextMove) {
@@ -33,7 +36,17 @@ function ChessBoard() {
                 to: targetSquare,
             }
             const gameCopy = game.current;
-            gameCopy.move(move)
+            let mov = gameCopy.move(move)
+            if (game.current.isGameOver()) {
+                setGameOver(true)
+                if (mov?.color == 'w') {
+                    console.log('whitewins');
+                    setGameOverData('white win')
+                } else {
+                    setGameOverData('black win')
+                    console.log('blackwins');
+                }
+            }
             setPosition(gameCopy.fen())
             setFen([...fen, gameCopy.fen()])
             setAllMoves([...allMoves, move])
@@ -85,7 +98,17 @@ function ChessBoard() {
         socket.current.on('getmove', (move) => {
             console.log(move);
             let gameCopyTwo = game.current;
-            gameCopyTwo.move(move.move)
+            let mov = gameCopyTwo.move(move.move)
+            if (game.current.isGameOver()) {
+                setGameOver(true)
+                if (mov?.color == 'w') {
+                    console.log('whitewins');
+                    setGameOverData('white win')
+                } else {
+                    setGameOverData('black win')
+                    console.log('blackwins');
+                }
+            }
             setPosition(gameCopyTwo.fen())
             setFen([...fen, gameCopyTwo.fen()])
             setAllMoves([...allMoves, move.move])
@@ -101,11 +124,16 @@ function ChessBoard() {
 
         return () => {
             console.log('enddddddddddd');
-            alert('You lost the game')
+            // alert('You lost the game')
             socket.current.emit('cancelgame', { gameId: gameId.split('-')[0] });
             socket.current.disconnect()
         }
+
     }, [])
+
+    // useEffect(() => {
+
+    // }, [gameOver])
 
     // useEffect(() => {
     // if (gameId.split('-')[1] == turn) {
@@ -118,6 +146,8 @@ function ChessBoard() {
 
 
     if (gameLoading) return <GameLoading />;
+
+    if (gameOver) return <GameOverMessage data={gameOverData} />;
 
     return (
         <>

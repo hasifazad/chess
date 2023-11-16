@@ -14,7 +14,7 @@ export default function Timer({ expiryTimestamp, color }) {
         pause,
         resume,
         restart,
-    } = useTimer({ expiryTimestamp, onExpire: () => console.warn('Game Over') });
+    } = useTimer({ expiryTimestamp, onExpire: () => console.warn('fghgfh') });
 
 
     useEffect(() => {
@@ -23,7 +23,6 @@ export default function Timer({ expiryTimestamp, color }) {
         } else {
             pause()
         }
-        console.log('time');
     }, [color])
 
     return (

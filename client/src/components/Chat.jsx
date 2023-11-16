@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import api from '../Axios'
-import { Box, Button, Container, Grid, Stack, TextField } from '@mui/material';
+import { Box, Button, Container, Grid, Stack, TextField, Typography } from '@mui/material';
 import axios from 'axios';
 import Conversation from './Conversation';
 import { UserDetailsContext } from '../context/UserContext';
@@ -11,13 +11,14 @@ import "../styles/chat.css"
 
 function Chat() {
     const CHAT_URL = import.meta.env.VITE_API_CHAT_URL
-    
+
     let { user } = useContext(UserDetailsContext)
     const socket = useRef()
 
     const [conversation, setConversation] = useState([])
     const [text, setText] = useState('')
     const [conversationId, setConversationId] = useState()
+    const [conversationName, setConversationName] = useState()
     const [messages, setMessages] = useState([])
     const [arrMsg, setArrMsg] = useState(null)
 
@@ -31,8 +32,9 @@ function Chat() {
         })
     }, [])
 
-    const handleConv = (convId) => {
+    const handleConv = (convId, convName) => {
         setConversationId(convId)
+        setConversationName(convName)
         let obj = {
             firstPersonId: user.userId,
             secondPersonId: convId,
@@ -101,11 +103,11 @@ function Chat() {
         <>
             <Container>
                 <Grid container direction='row' justifyContent='center' gap={2}>
-                    <Grid item xs={12} sm={8} md={5} lg={5} bgcolor='#FFFBF5' height='500px' sx={{ position: 'relative' }} padding={3}>
+                    <Grid item xs={12} sm={8} md={5} lg={5} bgcolor='#FFFBF5' height='550px' sx={{ position: 'relative' }} padding={3}>
+                    <Typography align='center' border={1} padding={1} marginBottom={2}>{conversationName}</Typography>
                         {conversationId ? <>
-                            <Box height='100%'>
+                            <Box height='90%'>
                                 <div className='chat-body'>
-
                                     {
 
                                         messages.map((msg, i) => <div ref={scrollRef} key={i}> <Message msg={msg} /></div>)

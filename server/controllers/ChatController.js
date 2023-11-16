@@ -40,7 +40,7 @@ module.exports = {
     getChat: async (req, res, next) => {
         try {
             let chats = await Chat.find({ person: { $all: [req.params.firtPersonId, req.params.secondPersonId] } })
-            console.log(chats);
+
             // if (chats.length !== 0) {
             res.status(200).json({ message: 'request successful', chats })
             // }

@@ -1,10 +1,23 @@
+.message-left {
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.message-right {
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 .message-body-left {
     padding: 3px;
     background-color: antiquewhite;
     margin: 4px;
     border-radius: 5px;
-    /* max-width: 70%; */
-    float: end;
+    width: 70%;
 }
 
 .message-body-right {
@@ -12,6 +25,6 @@
     background-color: rgb(160, 210, 230);
     margin: 4px;
     border-radius: 5px;
-    /* max-width: 70%; */
-    float: start;
+
+    width: 70%;
 }

@@ -1,9 +1,9 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import CircularProgress from '@mui/material/CircularProgress';
+import { useNavigate } from 'react-router-dom';
 
 const style = {
     position: 'absolute',
@@ -12,23 +12,19 @@ const style = {
     transform: 'translate(-50%, -50%)',
     width: 400,
     bgcolor: 'background.paper',
+    border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    border: 0,
-    borderRadius: 4
 };
 
-export default function GameLoading() {
-    // const [open, setOpen] = React.useState(true);
+export default function GameOverMessage({ data }) {
+    let navigate = useNavigate()
+    // const [open, setOpen] = React.useState(false);
     // const handleOpen = () => setOpen(true);
-    // const handleClose = () => setOpen(false);
+    const handleClose = () => navigate('/');
 
     return (
         <div>
-            {/* <Button onClick={handleOpen}>Open modal</Button> */}
             <Modal
                 open={true}
                 aria-labelledby="modal-modal-title"
@@ -36,9 +32,9 @@ export default function GameLoading() {
             >
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Player is joining...
+                        {data}
                     </Typography>
-                    <CircularProgress />
+                    <Button onClick={handleClose}>ok</Button>
                 </Box>
             </Modal>
         </div>

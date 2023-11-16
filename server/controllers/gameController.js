@@ -28,7 +28,6 @@ module.exports = {
 
             })
             gameId.save()
-            console.log(gameId);
             res.status(200).json({ message: 'Game create successfully', gameId: gameId._id })
         } catch (err) {
             next(err)
@@ -40,13 +39,13 @@ module.exports = {
     //@route -- PUT /api/game
     //@access -- private
     createGameLink: async (req, res, next) => {
-        console.log(req.body);
+
         try {
             let response = await Game.findOne({ _id: req.body.gameCode, game_played: false });
             if (response == null) { throw new Error('invalid link') }
 
             Game.updateOne({ _id: req.body.gameCode }, { $set: { 'second_player.id': req.body.userId, game_played: true } }).then((response) => {
-                console.log(response);
+
                 res.json({ message: 'Successfully added second player', status: true })
             }).catch((err) => {
                 next(new Error('sadfas'))
@@ -60,7 +59,7 @@ module.exports = {
     //@route -- PUT /api/game
     //@access -- private
     setMoves: async (req, res) => {
-        console.log(req.body);
+
         await Game.updateOne({ _id: req.body.gameId }, {
             $push: {
                 moves: req.body.move,

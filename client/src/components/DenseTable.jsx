@@ -10,7 +10,6 @@ import Paper from '@mui/material/Paper';
 
 
 export default function DenseTable({ data }) {
-    console.log(data);
     return (
         <TableContainer sx={{ height: 390 }} >
             <Table stickyHeader size="small">
