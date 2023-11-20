@@ -40,7 +40,7 @@ function Login() {
     }
     console.log(user);
     return (
-        <Grid item xs={4}>
+        <Grid container>
             <Paper elevation={10} style={paperStyle}>
                 <Grid align='center'>
                     <Avatar sx={{ width: 56, height: 56 }}>

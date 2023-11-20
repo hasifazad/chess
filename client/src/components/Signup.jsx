@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Avatar, Box, Button, Grid, Paper, TextField, Typography } from '@mui/material'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import axios from 'axios'
 import api from '../Axios';
@@ -14,18 +14,21 @@ function Signup() {
     let [signupResponse, setSignupResponse] = useState(null)
     let { register, handleSubmit, formState: { errors } } = useForm()
 
+    let navigate = useNavigate()
+
     // const BASE_URL = import.meta.env.VITE_API_BASE_URL
     const onSubmit = (data) => {
         console.log(data);
         api.post(`/user/register`, data).then((response) => {
             console.log(response);
+            navigate('/login')
         }).catch((error) => {
             console.log(error.response);
         })
     }
 
     return (
-        <Grid item xs={4}>
+        <Grid container>
             <Paper elevation={10} style={paperStyle}>
                 <Grid align='center'>
                     <Avatar sx={{ width: 56, height: 56 }}>

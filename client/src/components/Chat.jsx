@@ -8,6 +8,7 @@ import Message from './Message';
 import io from "socket.io-client"
 import SendIcon from '@mui/icons-material/Send';
 import "../styles/chat.css"
+import Loading from './Loading';
 
 function Chat() {
     const CHAT_URL = import.meta.env.VITE_API_CHAT_URL
@@ -104,16 +105,19 @@ function Chat() {
             <Container>
                 <Grid container direction='row' justifyContent='center' gap={2}>
                     <Grid item xs={12} sm={8} md={5} lg={5} bgcolor='#FFFBF5' height='550px' sx={{ position: 'relative' }} padding={3}>
-                    <Typography align='center' border={1} padding={1} marginBottom={2}>{conversationName}</Typography>
+                        <Typography align='center' border={1} padding={1} marginBottom={2}>{conversationName ? conversationName : 'select a person from left'}</Typography>
                         {conversationId ? <>
+
                             <Box height='90%'>
-                                <div className='chat-body'>
-                                    {
+                                {messages.length == 0 ? <Loading /> :
+                                    <div className='chat-body'>
+                                        {
 
-                                        messages.map((msg, i) => <div ref={scrollRef} key={i}> <Message msg={msg} /></div>)
-                                    }
+                                            messages.map((msg, i) => <div ref={scrollRef} key={i}> <Message msg={msg} /></div>)
+                                        }
 
-                                </div>
+                                    </div>
+                                }
                             </Box>
                             <Box sx={{ position: 'absolute', bottom: '0' }} width='82%'>
                                 <Stack direction='row' justifyContent='center' alignItems='center' >

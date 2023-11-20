@@ -44,6 +44,10 @@ module.exports = {
             let response = await Game.findOne({ _id: req.body.gameCode, game_played: false });
             if (response == null) { throw new Error('invalid link') }
 
+            // if (response.first_player.id == req.body.userId) {
+            //     return res.json({ message: 'Successfully added second player', status: true })
+            // }
+
             Game.updateOne({ _id: req.body.gameCode }, { $set: { 'second_player.id': req.body.userId, game_played: true } }).then((response) => {
 
                 res.json({ message: 'Successfully added second player', status: true })

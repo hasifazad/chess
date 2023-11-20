@@ -1,9 +1,10 @@
-import { Grid } from '@mui/material'
+import { Box, Grid } from '@mui/material'
 import { Chess } from 'chess.js'
 import React, { useRef, useState } from 'react'
 import { Chessboard } from 'react-chessboard'
 import DenseTable from './DenseTable'
 import Timer from './Timer'
+import GameOverMessage from './GameOverMessage'
 
 function ChessBoardOffline() {
 
@@ -12,6 +13,8 @@ function ChessBoardOffline() {
   const [position, setPosition] = useState('start')
   const [moves, setMoves] = useState([])
   const [turn, setTurn] = useState('w')
+  const [gameOver, setGameOver] = useState({ status: false, message: '' })
+
 
   const drop = (sourceSquare, targetSquare) => {
     const move = {
@@ -24,8 +27,16 @@ function ChessBoardOffline() {
     if (game.current.isGameOver()) {
       if (mov?.color == 'w') {
         console.log('whitewins');
+        setGameOver({
+          status: true,
+          message: 'white win the game'
+        })
       } else {
         console.log('blackwins');
+        setGameOver({
+          status: true,
+          message: 'black win the game'
+        })
       }
     }
 
@@ -39,6 +50,9 @@ function ChessBoardOffline() {
   // console.log(game.current.fen());
   const time = new Date();
   time.setSeconds(time.getSeconds() + 10); // 10 minutes timer
+
+  if (gameOver?.status) return <GameOverMessage data={gameOver.message} />
+
   return (
     <>
       <Grid container
@@ -50,12 +64,22 @@ function ChessBoardOffline() {
         marginTop={0.5}
       >
         <Grid item xs={12} sm={10} md={8} lg={5}>
+          <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+            <Timer expiryTimestamp={time} color={moves[moves.length - 1]?.color} />
+          </Box>
           <Chessboard position={position} onPieceDrop={drop} />
+          <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+            <Timer expiryTimestamp={time} color={moves[moves.length - 1]?.color == 'w' ? 'b' : 'w'} />
+          </Box>
         </Grid>
         <Grid item xs={12} sm={8} md={8} lg={4}>
-          <Timer expiryTimestamp={time} color={moves[moves.length - 1]?.color} />
+          <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+            <Timer expiryTimestamp={time} color={moves[moves.length - 1]?.color} />
+          </Box>
           <DenseTable data={moves} />
-          <Timer expiryTimestamp={time} color={moves[moves.length - 1]?.color == 'w' ? 'b' : 'w'} />
+          <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+            <Timer expiryTimestamp={time} color={moves[moves.length - 1]?.color == 'w' ? 'b' : 'w'} />
+          </Box>
         </Grid>
       </Grid>
 

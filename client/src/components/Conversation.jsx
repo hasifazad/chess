@@ -2,25 +2,31 @@ import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemButton, ListItemTe
 import React from 'react'
 import { blue } from '@mui/material/colors';
 import PersonIcon from '@mui/icons-material/Person';
+import Loading from './Loading';
 
 function Conversation({ conv, handleConv }) {
-
+    console.log(conv);
     return (
         <>
-            <List sx={{ pt: 0 }}>
-                {conv.map((data) => (
-                    <ListItem disableGutters key={data._id}>
-                        <ListItemButton onClick={() => { handleConv(data._id, data.username) }}>
-                            <ListItemAvatar>
-                                <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
-                                    <PersonIcon />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary={data.email} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
+            {conv.length == 0 ? <Loading /> :
+                <List sx={{ pt: 0 }}>
+
+                    {conv.map((data) => (
+                        <ListItem disableGutters key={data._id}>
+                            <ListItemButton onClick={() => { handleConv(data._id, data.username) }}>
+                                <ListItemAvatar>
+                                    <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
+                                        <PersonIcon />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText primary={data.email} />
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
+
+
+                </List>
+            }
         </>
 
     )
