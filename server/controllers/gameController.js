@@ -38,7 +38,7 @@ module.exports = {
     //@descrp -- to add second player
     //@route -- PUT /api/game
     //@access -- private
-    createGameLink: async (req, res, next) => {
+    joinGame: async (req, res, next) => {
 
         try {
             let response = await Game.findOne({ _id: req.body.gameCode, game_played: false });

@@ -25,7 +25,7 @@ export default function PlayWithLink({ ...params }) {
             gameCode: gameCode.split('-')[0],
             userId: user.userId
         }
-        api.post('/game/create-game-link', data).then((response) => {
+        api.put('/game/join-game', data).then((response) => {
 
             if (response.data.status) {
                 setOpen(false)

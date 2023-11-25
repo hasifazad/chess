@@ -87,6 +87,7 @@ function ChessBoard() {
 
 
     useEffect(() => {
+
         socket.current = io(`${CHESS_URL}`)
 
 
