@@ -134,7 +134,7 @@ function Header() {
                         </Typography>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt={user?.status ? user.username.toUpperCase() : null} src="" />
+                                <Avatar alt="" src={user?.image} />
                             </IconButton>
                         </Tooltip>
                         <Menu

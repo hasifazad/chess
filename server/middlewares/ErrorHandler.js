@@ -6,6 +6,7 @@ const errorHandler = (err, req, res, next) => {
 
     switch (statusCode) {
         case constants.VALIDATION_ERROR:
+            console.log('valiation err');
             res.json({ title: 'Validation Error', message: err.message, stackTrace: err.stack })
             break;
         case constants.UNAUTHORIZED:
@@ -22,7 +23,7 @@ const errorHandler = (err, req, res, next) => {
             break;
         default:
             res.json({ title: 'Server Error', message: err.message, stackTrace: err.stack })
-            // console.log(err);
+            console.log(err);
             break;
     }
 }

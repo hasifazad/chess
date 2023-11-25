@@ -9,12 +9,12 @@ const dbConnect = require("./config/MongoDbConnection.js");
 
 
 
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
 dbConnect();
 
-app.use(errorHandler)
 const userRoute = require("./routes/UserRoute.js")
 const gameRoute = require("./routes/GameRoute.js")
 const chatRoute = require("./routes/ChatRoute.js")
@@ -23,9 +23,8 @@ app.use("/api/user", userRoute);
 app.use("/api/game", gameRoute);
 app.use("/api/chat", chatRoute);
 
-app.get('/', (req, res) => {
-    res.json({ message: "hello world" })
-})
+app.use(errorHandler)
+
 
 const PORT = process.env.PORT || 3002;
 

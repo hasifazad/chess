@@ -14,13 +14,29 @@ const userSchema = mongoose.Schema({
         type: String,
         required: [true, "password required"]
     },
+    firstname: {
+        type: String,
+        default: null
+    },
+    lastname: {
+        type: String,
+        default: null
+    },
     image: {
         type: String,
         default: null
 
     },
     mobile: {
-        type: Number,
+        type: String,
+        default: null
+    },
+    country: {
+        type: String,
+        default: null
+    },
+    city: {
+        type: String,
         default: null
     },
 }, {

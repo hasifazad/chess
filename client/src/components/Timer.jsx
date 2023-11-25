@@ -17,18 +17,18 @@ export default function Timer({ expiryTimestamp, color }) {
     } = useTimer({ expiryTimestamp, onExpire: () => console.warn('fghgfh') });
 
 
-    useEffect(() => {
-        if (color == 'w') {
-            resume()
-        } else {
-            pause()
-        }
-    }, [color])
+    // useEffect(() => {
+    //     if (color == 'w') {
+    //         resume()
+    //     } else {
+    //         pause()
+    //     }
+    // }, [color])
 
     return (
         <div style={{ textAlign: 'center' }}>
             <div style={{ fontSize: '100px' }}>
-                <Typography fontSize={50}>{minutes}:{seconds}</Typography>
+                <Typography fontSize={50}>{minutes}:{seconds}:</Typography>
             </div>
             {/* <p>{isRunning ? 'Running' : 'Not running'}</p>
             <button onClick={start}>Start</button>

@@ -1,19 +1,31 @@
 const express = require("express");
 const router = express.Router()
+const upload = require("../middlewares/multer")
 
 
-const { registerUser, loginUser, getUsers } = require("../controllers/userController");
+const { signupUser, loginUser, getAllUsers, getUser, updateUser, updateImage } = require("../controllers/userController");
 const validateToken = require("../middlewares/validateToken");
 
-router.post("/register", registerUser)
+
+
+router.post("/signup", signupUser)
 
 router.post("/login", loginUser)
 
-router.get("/get-all-users", getUsers)
+router.get("/get-users", getAllUsers)
 
-router.get('/validate', validateToken, (req, res) => {
-    res.status(200).json({ message: 'validated successful', user: req.user })
-})
+router.get("/get-user/:userId", getUser)
+
+router.post("/update-user/:userId", updateUser)
+
+router.post("/update-user-image/:userId", upload, updateImage)
+
+
+router.get('/validate', validateToken, getUser)
+
+//     (req, res) => {
+//     res.status(200).json({ message: 'validated successful', user: req.user })
+// }
 
 
 module.exports = router;

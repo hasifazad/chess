@@ -8,9 +8,17 @@ import { useParams } from 'react-router-dom'
 import api from '../Axios';
 import { Grid } from '@mui/material'
 import GameOverMessage from './GameOverMessage'
+import { useUnload } from '../customhooks/onLoad'
+import Timer from './Timer'
 
 
 function ChessBoard() {
+
+    useUnload((e) => {
+        e.preventDefault();
+        e.returnValue = 'hello';
+    });
+
     const CHESS_URL = import.meta.env.VITE_API_CHESS_URL
 
     let { user } = useContext(UserDetailsContext)
@@ -28,6 +36,7 @@ function ChessBoard() {
     const [turn, setTurn] = useState('w')
     const [gameOver, setGameOver] = useState(false)
     const [gameOverData, setGameOverData] = useState()
+    const [time, setTime] = useState()
 
     function drop(sourceSquare, targetSquare) {
         if (nextMove) {
@@ -93,6 +102,12 @@ function ChessBoard() {
 
         socket.current.on('playerjoined', (h) => {
             setGameLoading(false)
+
+            let time = new Date();
+            let a = gameId.split('-')[2]
+            let t = time.setSeconds(time.getSeconds() + (Number(a) * 600)); // 10 minutes timer
+            setTime(t)
+            console.log(t);
         })
 
         socket.current.on('getmove', (move) => {
@@ -121,6 +136,8 @@ function ChessBoard() {
         } else {
             setNextMove(false)
         }
+
+
 
         return () => {
             console.log('enddddddddddd');
@@ -153,6 +170,7 @@ function ChessBoard() {
         <>
             <Grid container direction='row' columns={12} justifyContent='center' alignItems='center' height='88vh'>
                 <Grid item xs={12} sm={10} md={8} lg={5}>
+                    <Timer expiryTimestamp={time} />
                     <Chessboard position={position} onPieceDrop={drop} />
                 </Grid>
             </Grid>

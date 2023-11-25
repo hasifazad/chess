@@ -8,6 +8,7 @@ import PrivateRoute from './PrivateRoute'
 import Signup from './components/Signup'
 import ChatPage from './pages/ChatPage'
 import StartGamePage from './pages/StartGamePage'
+import ProfileSettingsPage from './pages/ProfileSettingsPage'
 
 
 
@@ -22,6 +23,7 @@ function App() {
               <Route element={<HomePage />} path='/' />
               <Route element={<GamePage />} path='/game/:gameId' />
               <Route element={<ChatPage />} path='/chat' />
+              <Route element={<ProfileSettingsPage />} path='/profile/:userId' />
               <Route element={<StartGamePage />} path='/startgame' />
             </Route>
             <Route element={<Login />} path='/login' />

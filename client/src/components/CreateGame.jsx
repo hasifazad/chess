@@ -6,12 +6,13 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Box, FormControlLabel, RadioGroup, Slider, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
+import { Box, FormControlLabel, InputAdornment, RadioGroup, Slider, ToggleButton, ToggleButtonGroup, Tooltip, Typography } from '@mui/material';
 import PlayWithLink from './PlayWithLink';
 import { Navigate, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { UserDetailsContext } from '../context/UserContext';
 import api from '../Axios';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 export default function CreateGame() {
 
@@ -54,6 +55,15 @@ export default function CreateGame() {
         navigate(`/game/${codeGenerated}`)
     }
 
+    const [copy, setCopy] = useState('copy')
+    const copyText = () => {
+        navigator.clipboard.writeText(codeGenerated).then(() => {
+            setCopy('copied');
+            setTimeout(function () {
+                setCopy('copy');
+            }, 3000);
+        }).catch((err) => console.log(err))
+    }
 
 
     // ###########################################
@@ -104,7 +114,18 @@ export default function CreateGame() {
                             <Slider defaultValue={timeDuration} getAriaValueText={valueText} aria-label="Default" valueLabelDisplay="auto" />
                         </Box></> : null}
                     <Button variant="contained" disabled={codeGenerated ? true : false} onClick={createLink} fullWidth>CREATE CODE</Button>
-                    <TextField size="small" fullWidth disabled sx={{ margin: '20px 0 15px 0' }} value={codeGenerated} />
+
+                    <TextField size="small" fullWidth disabled sx={{ margin: '20px 0 15px 0' }} value={codeGenerated}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end" style={{ cursor: 'pointer' }} onClick={copyText}>
+                                    <Tooltip title={copy}>
+                                        <ContentCopyIcon />
+                                    </Tooltip>
+                                </InputAdornment>
+                            )
+                        }}
+                    />
 
                 </DialogContent>
                 <DialogActions>

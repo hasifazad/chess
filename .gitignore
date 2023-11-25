@@ -6,5 +6,6 @@
 
 /client/.env
 /server/.env
+/server/firebase.json
 
 /client/dist

@@ -10,12 +10,12 @@ function Conversation({ conv, handleConv }) {
         <>
             {conv.length == 0 ? <Loading /> :
                 <List sx={{ pt: 0 }}>
-
+                    {/* {console.log(data?.image)} */}
                     {conv.map((data) => (
                         <ListItem disableGutters key={data._id}>
-                            <ListItemButton onClick={() => { handleConv(data._id, data.username) }}>
+                            <ListItemButton onClick={() => { handleConv(data._id, data.username, data.image) }}>
                                 <ListItemAvatar>
-                                    <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
+                                    <Avatar sx={{ bgcolor: blue[100], color: blue[600] }} src={data.image}>
                                         <PersonIcon />
                                     </Avatar>
                                 </ListItemAvatar>

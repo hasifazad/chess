@@ -15,7 +15,7 @@ function Login() {
     const errStyle = { color: 'red', margin: 0 }
 
 
-    let [loginResponse, setLoginResponse] = useState(null)
+    let [responseMessage, setResponseMessage] = useState(null)
     let { register, handleSubmit, formState: { errors } } = useForm()
 
     let { setUser, user } = useContext(UserDetailsContext)
@@ -35,6 +35,7 @@ function Login() {
             })
             navigate('/')
         }).catch((error) => {
+            setResponseMessage(error.response.data.message)
             console.log(error.response);
         })
     }
@@ -48,7 +49,7 @@ function Login() {
                     </Avatar>
                     <Typography variant='h5'>LOG IN</Typography>
                     <Typography variant='caption'>Please fill this form to create an account</Typography>
-                    <p style={errStyle}>{loginResponse ? loginResponse : null}</p>
+                    <p style={errStyle}>{responseMessage ? responseMessage : null}</p>
                 </Grid>
                 <Box>
                     <form onSubmit={handleSubmit(onSubmit)}>

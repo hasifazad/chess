@@ -11,7 +11,7 @@ function Signup() {
     const textStyle = { margin: '10px 0', backgroundColor: 'white' }
     const errStyle = { color: 'red', margin: 0 }
 
-    let [signupResponse, setSignupResponse] = useState(null)
+    let [responseMessage, setResponseMessage] = useState(null)
     let { register, handleSubmit, formState: { errors } } = useForm()
 
     let navigate = useNavigate()
@@ -19,10 +19,11 @@ function Signup() {
     // const BASE_URL = import.meta.env.VITE_API_BASE_URL
     const onSubmit = (data) => {
         console.log(data);
-        api.post(`/user/register`, data).then((response) => {
+        api.post(`/user/signup`, data).then((response) => {
             console.log(response);
             navigate('/login')
         }).catch((error) => {
+            setResponseMessage(error.response.data.message)
             console.log(error.response);
         })
     }
@@ -36,7 +37,7 @@ function Signup() {
                     </Avatar>
                     <Typography variant='h5'>SIGN UP</Typography>
                     <Typography variant='caption'>Please fill this form to create an account</Typography>
-                    <p style={errStyle}>{signupResponse ? signupResponse : null}</p>
+                    <p style={errStyle}>{responseMessage ? responseMessage : null}</p>
                 </Grid>
                 <Box>
                     <form onSubmit={handleSubmit(onSubmit)}>
