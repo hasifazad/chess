@@ -2,7 +2,7 @@ import { Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useTimer } from 'react-timer-hook';
 
-export default function Timer({ expiryTimestamp, color }) {
+export default function Timer({ expiryTimestamp, state }) {
     const {
         totalSeconds,
         seconds,
@@ -14,21 +14,21 @@ export default function Timer({ expiryTimestamp, color }) {
         pause,
         resume,
         restart,
-    } = useTimer({ expiryTimestamp, onExpire: () => console.warn('fghgfh') });
+    } = useTimer({ expiryTimestamp, onExpire: () => console.warn('timer expired') });
 
 
-    // useEffect(() => {
-    //     if (color == 'w') {
-    //         resume()
-    //     } else {
-    //         pause()
-    //     }
-    // }, [color])
+    useEffect(() => {
+        if (state) {
+            resume()
+        } else {
+            pause()
+        }
+    }, [state])
 
     return (
         <div style={{ textAlign: 'center' }}>
             <div style={{ fontSize: '100px' }}>
-                <Typography fontSize={50}>{minutes}:{seconds}:</Typography>
+                <Typography fontSize={50}>{minutes}:{seconds}</Typography>
             </div>
             {/* <p>{isRunning ? 'Running' : 'Not running'}</p>
             <button onClick={start}>Start</button>

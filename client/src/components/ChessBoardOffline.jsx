@@ -5,6 +5,7 @@ import { Chessboard } from 'react-chessboard'
 import DenseTable from './DenseTable'
 import Timer from './Timer'
 import GameOverMessage from './GameOverMessage'
+import FloatingButton from './FloatingButton'
 import { useNavigate } from 'react-router-dom'
 import { useUnload } from '../customhooks/onLoad'
 
@@ -13,7 +14,6 @@ import { useUnload } from '../customhooks/onLoad'
 
 
 function ChessBoardOffline() {
-  console.log('fgdfgd');
   let navigate = useNavigate()
 
   let game = useRef(new Chess())
@@ -30,8 +30,7 @@ function ChessBoardOffline() {
       to: targetSquare,
     }
     let mov = game.current.move(move)
-    // console.log(game.current.fen());
-    // const gameCopy = game.current;
+
     if (game.current.isGameOver()) {
       if (mov?.color == 'w') {
         console.log('whitewins');
@@ -56,51 +55,50 @@ function ChessBoardOffline() {
 
   }
 
-  useUnload((e) => {
-    e.preventDefault();
-    e.returnValue = 'hello';
-  });
-
-
-
-
-  // console.log(game.current.fen());
-  const time = new Date();
-  let a = time.setSeconds(time.getSeconds() + 100); // 10 minutes timer
-  console.log(a)
+  // useUnload((e) => {
+  //   e.preventDefault();
+  //   e.returnValue = 'hello';
+  // });
 
   if (gameOver?.status) return <GameOverMessage data={gameOver.message} />
 
   return (
     <>
+      {/* <Box position='relative'> */}
       <Grid container
         direction='row'
         columns={12}
         spacing={2}
         justifyContent='center'
         height='88vh'
-        marginTop={0.5}
       >
         <Grid item xs={12} sm={10} md={8} lg={5}>
-          <Box sx={{ display: { xs: 'block', md: 'none' } }}>
-            <Timer expiryTimestamp={a} color={moves[moves.length - 1]?.color} />
+          <Box display='flex' justifyContent='space-between'>
+            <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+              <Timer expiryTimestamp={Date.now() + (1000 * 60 * 10)} state={true} />
+            </Box>
+            <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+              <Timer expiryTimestamp={Date.now() + (1000 * 60 * 10)} state={true} />
+            </Box>
           </Box>
           <Chessboard position={position} onPieceDrop={drop} />
-          <Box sx={{ display: { xs: 'block', md: 'none' } }}>
-            <Timer expiryTimestamp={time} color={moves[moves.length - 1]?.color == 'w' ? 'b' : 'w'} />
-          </Box>
         </Grid>
+
         <Grid item xs={12} sm={8} md={8} lg={4}>
-          <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-            <Timer expiryTimestamp={time} color={moves[moves.length - 1]?.color} />
+          <Box display='flex' justifyContent='space-between'>
+            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+              <Timer expiryTimestamp={a} color={moves[moves.length - 1]?.color} />
+            </Box>
+            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+              <Timer expiryTimestamp={a} color={moves[moves.length - 1]?.color == 'w' ? 'b' : 'w'} />
+            </Box>
           </Box>
           <DenseTable data={moves} />
-          <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-            <Timer expiryTimestamp={time} color={moves[moves.length - 1]?.color == 'w' ? 'b' : 'w'} />
-          </Box>
         </Grid>
-      </Grid>
+      </Grid >
 
+
+      {/* </Box> */}
     </>
   )
 }

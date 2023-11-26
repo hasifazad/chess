@@ -21,24 +21,24 @@ export default function PlayWithLink({ ...params }) {
     const navigate = useNavigate()
     const BASE_URL = import.meta.env.VITE_API_BASE_URL
     const startGame = () => {
-        let data = {
-            gameCode: gameCode.split('-')[0],
-            userId: user.userId
-        }
-        api.put('/game/join-game', data).then((response) => {
+        // let data = {
+        //     gameCode: gameCode.split('-')[0],
+        //     userId: user.userId
+        // }
+        // api.put('/game/join-game', data).then((response) => {
 
-            if (response.data.status) {
-                setOpen(false)
-                if (gameCode.split('-')[1] == 'w')
-                    navigate(`/game/${gameCode.split('-')[0]}-b-${gameCode.split('-')[2]}`)
-                else
-                    navigate(`/game/${gameCode.split('-')[0]}-w-${gameCode.split('-')[2]}`)
-            }
-        }).catch((error) => {
-            // console.log('errorrr');
-            setError(true)
-            console.log(error);
-        })
+        //     if (response.data.status) {
+        //         setOpen(false)
+        //         if (gameCode.split('-')[1] == 'w')
+        //             navigate(`/game/${gameCode.split('-')[0]}-b-${gameCode.split('-')[2]}`)
+        //         else
+        //             navigate(`/game/${gameCode.split('-')[0]}-w-${gameCode.split('-')[2]}`)
+        //     }
+        // }).catch((error) => {
+        //     setError(true)
+        //     console.log(error);
+        // })
+        navigate(`/game/${gameCode}`)
     }
 
 

@@ -2,6 +2,9 @@ const mongoose = require('mongoose')
 
 const gameSchema = new mongoose.Schema(
     {
+        created_by: {
+            type: mongoose.SchemaTypes.ObjectId
+        },
         first_player: {
             id: { type: mongoose.SchemaTypes.ObjectId },
             chess_piece_color: { type: String }

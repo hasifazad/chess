@@ -15,8 +15,9 @@ module.exports = {
 
         try {
             let gameId = await Game.create({
+                created_by: req.body.userId,
                 first_player: {
-                    id: req.body.userId,
+                    id: null,
                     chess_piece_color: req.body.chessPieceColor
                 },
                 second_player: {
@@ -39,21 +40,47 @@ module.exports = {
     //@route -- PUT /api/game
     //@access -- private
     joinGame: async (req, res, next) => {
+        console.log(req.body);
 
         try {
-            let response = await Game.findOne({ _id: req.body.gameCode, game_played: false });
-            if (response == null) { throw new Error('invalid link') }
+            let response = await Game.findOne({ _id: req.body.gameId, game_played: false });
+            if (response == null) throw new Error('invalid link');
+
+            if (response.created_by == req.body.userId) {
+
+                await Game.updateOne({ _id: req.body.gameId }, { $set: { 'first_player.id': req.body.userId } })
+
+
+            } else {
+
+                await Game.updateOne({ _id: req.body.gameId }, { $set: { 'second_player.id': req.body.userId } })
+
+
+            }
+            let data = await Game.findOne({ _id: req.body.gameId })
+            if (data.first_player.id != null && data.second_player.id != null) {
+                let gameData = await Game.findOneAndUpdate({ _id: req.body.gameId }, {
+                    $set: {
+                        game_played: true
+                    }
+                }, { returnDocument: 'after' })
+                console.log(gameData);
+                res.json({ message: 'Successfully added two players', status: true, gameData })
+            } else {
+                res.json({ message: 'Successfully added one player', status: false, gameData: data })
+            }
+
 
             // if (response.first_player.id == req.body.userId) {
             //     return res.json({ message: 'Successfully added second player', status: true })
             // }
 
-            Game.updateOne({ _id: req.body.gameCode }, { $set: { 'second_player.id': req.body.userId, game_played: true } }).then((response) => {
+            // Game.updateOne({ _id: req.body.gameCode }, { $set: { 'second_player.id': req.body.userId, game_played: true } }).then((response) => {
 
-                res.json({ message: 'Successfully added second player', status: true })
-            }).catch((err) => {
-                next(new Error('sadfas'))
-            })
+            //     res.json({ message: 'Successfully added second player', status: true })
+            // }).catch((err) => {
+            //     next(new Error('sadfas'))
+            // })
         } catch (error) {
             next(error)
         }
@@ -74,4 +101,14 @@ module.exports = {
 
         res.status(200).json('success')
     },
+
+    getGame: async (req, res, next) => {
+        console.log(req.params);
+        try {
+            let response = await Game.findOne({ _id: req.params.gameId })
+            res.status(200).json({ message: 'request successful', response })
+        } catch (error) {
+            next(error)
+        }
+    }
 }

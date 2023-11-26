@@ -9,8 +9,6 @@ import Login from "./components/Login";
 
 let PrivateRoute = () => {
 
-    console.log('privateroute');
-
     let { user, setUser } = useContext(UserDetailsContext)
     let [loading, setLoading] = useState(false)
 

@@ -30,7 +30,7 @@ export default function CreateGame() {
     }
 
     const BASE_URL = import.meta.env.VITE_API_BASE_URL
-    const createLink = () => {
+    const createGame = () => {
         let data = {
             userId: user.userId,
             chessPieceColor,
@@ -43,7 +43,7 @@ export default function CreateGame() {
         // })
         api.post('/game/create-game', data).then((response) => {
             console.log(response);
-            setCodeGenerated(`${response.data.gameId}-${chessPieceColor}-${timeDuration}`)
+            setCodeGenerated(response.data.gameId)
 
         }).catch((error) => {
             console.log(error);
@@ -101,7 +101,7 @@ export default function CreateGame() {
                             <ToggleButton value="w">
                                 <Typography>WHITE</Typography>
                             </ToggleButton>
-                            <ToggleButton value="r">
+                            <ToggleButton value="w">
                                 <Typography>RANDOM</Typography>
                             </ToggleButton>
                             <ToggleButton value="b">
@@ -113,7 +113,7 @@ export default function CreateGame() {
                             <Typography>Time Duration &nbsp;&nbsp;:&nbsp;{timeDuration} minutes</Typography>
                             <Slider defaultValue={timeDuration} getAriaValueText={valueText} aria-label="Default" valueLabelDisplay="auto" />
                         </Box></> : null}
-                    <Button variant="contained" disabled={codeGenerated ? true : false} onClick={createLink} fullWidth>CREATE CODE</Button>
+                    <Button variant="contained" disabled={codeGenerated ? true : false} onClick={createGame} fullWidth>CREATE CODE</Button>
 
                     <TextField size="small" fullWidth disabled sx={{ margin: '20px 0 15px 0' }} value={codeGenerated}
                         InputProps={{

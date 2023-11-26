@@ -75,7 +75,7 @@ io.on("connect", (socket) => {
         if (r) {
 
             for (i = 0; i < 2; i++) {
-                io.to(r.s[i]).emit('playerjoined', {})
+                io.to(r.s[i]).emit('playerjoined', gameObj)
             }
         }
     })

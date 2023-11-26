@@ -97,6 +97,10 @@ function Chat() {
             setArrMsg(msgObj)
         })
 
+        return () => {
+            socket.current.disconnect()
+        }
+
     }, [])
 
     useEffect(() => {
