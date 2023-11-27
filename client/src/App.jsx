@@ -9,6 +9,7 @@ import Signup from './components/Signup'
 import ChatPage from './pages/ChatPage'
 import StartGamePage from './pages/StartGamePage'
 import ProfileSettingsPage from './pages/ProfileSettingsPage'
+import Error from './components/Error'
 
 
 
@@ -28,6 +29,7 @@ function App() {
             </Route>
             <Route element={<Login />} path='/login' />
             <Route element={<Signup />} path='/signup' />
+            <Route element={<Error />} path='/*' />
           </Routes>
         </BrowserRouter>
         {/* <Footer /> */}

@@ -14,11 +14,11 @@ function StartGamePage() {
 
     return (
         <>
-            <Box>
-                {state ? <FloatChat /> : null}
-                <ChessBoardOffline />
-                <FloatingButton fun={onHandleChange} state={state} />
-            </Box>
+            {/* <Box> */}
+            {/* {state ? <FloatChat /> : null} */}
+            <ChessBoardOffline />
+            {/* <FloatingButton fun={onHandleChange} state={state} /> */}
+            {/* </Box> */}
         </>
     )
 }

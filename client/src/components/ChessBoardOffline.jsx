@@ -87,10 +87,10 @@ function ChessBoardOffline() {
         <Grid item xs={12} sm={8} md={8} lg={4}>
           <Box display='flex' justifyContent='space-between'>
             <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-              <Timer expiryTimestamp={a} color={moves[moves.length - 1]?.color} />
+              <Timer expiryTimestamp={Date.now() + (1000 * 60 * 10)} state={true} />
             </Box>
             <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-              <Timer expiryTimestamp={a} color={moves[moves.length - 1]?.color == 'w' ? 'b' : 'w'} />
+              <Timer expiryTimestamp={Date.now() + (1000 * 60 * 10)} state={true} />
             </Box>
           </Box>
           <DenseTable data={moves} />
