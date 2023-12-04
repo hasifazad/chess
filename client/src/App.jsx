@@ -10,6 +10,9 @@ import ChatPage from './pages/ChatPage'
 import StartGamePage from './pages/StartGamePage'
 import ProfileSettingsPage from './pages/ProfileSettingsPage'
 import Error from './components/Error'
+import QuizPage from './pages/QuizPage'
+import Quiz from './components/Quiz'
+import AddQuestions from './components/AddQuestions'
 
 
 
@@ -26,6 +29,9 @@ function App() {
               <Route element={<ChatPage />} path='/chat' />
               <Route element={<ProfileSettingsPage />} path='/profile/:userId' />
               <Route element={<StartGamePage />} path='/startgame' />
+              <Route element={<QuizPage />} path='/quiz' />
+              <Route element={<Quiz />} path='/quiz/:subject' />
+              <Route element={<AddQuestions />} path='/quiz/add-question' />
             </Route>
             <Route element={<Login />} path='/login' />
             <Route element={<Signup />} path='/signup' />

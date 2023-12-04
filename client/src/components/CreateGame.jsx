@@ -13,6 +13,7 @@ import axios from 'axios';
 import { UserDetailsContext } from '../context/UserContext';
 import api from '../Axios';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import ShareList from './ShareList';
 
 export default function CreateGame() {
 
@@ -130,6 +131,7 @@ export default function CreateGame() {
                 </DialogContent>
                 <DialogActions>
                     {/* <PlayWithLink /> */}
+                    {codeGenerated ? <ShareList code={codeGenerated} /> : null}
                     <Button onClick={handlePlay} disabled={codeGenerated ? false : true}>PLAY</Button>
                     <Button onClick={handleClose}>CANCEL</Button>
                 </DialogActions>

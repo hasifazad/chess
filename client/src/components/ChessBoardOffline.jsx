@@ -29,6 +29,7 @@ function ChessBoardOffline() {
       from: sourceSquare,
       to: targetSquare,
     }
+    console.log(move);
     let mov = game.current.move(move)
 
     if (game.current.isGameOver()) {
@@ -81,7 +82,11 @@ function ChessBoardOffline() {
               <Timer expiryTimestamp={Date.now() + (1000 * 60 * 10)} state={true} />
             </Box>
           </Box>
-          <Chessboard position={position} onPieceDrop={drop} />
+          <Chessboard
+            boardOrientation='black'
+            promotionDialogVariant='modal'
+            // arePiecesDraggable={false}
+            position={position} onPieceDrop={drop} />
         </Grid>
 
         <Grid item xs={12} sm={8} md={8} lg={4}>

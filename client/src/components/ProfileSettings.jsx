@@ -82,6 +82,10 @@ function ProfileSettings() {
             // { headers: { 'Content-Type': 'multipart/form-data' } }
         ).then((response) => {
             console.log(response);
+            setProfileUpdated(true)
+            setTimeout(() => {
+                setProfileUpdated(false)
+            }, 2500)
         }).catch((err) => {
             console.log(err);
         })

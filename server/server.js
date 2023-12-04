@@ -18,10 +18,12 @@ dbConnect();
 const userRoute = require("./routes/UserRoute.js")
 const gameRoute = require("./routes/GameRoute.js")
 const chatRoute = require("./routes/ChatRoute.js")
+const quizRoute = require("./routes/QuizRoute.js")
 
 app.use("/api/user", userRoute);
 app.use("/api/game", gameRoute);
 app.use("/api/chat", chatRoute);
+app.use("/api/quiz", quizRoute);
 
 app.use(errorHandler)
 

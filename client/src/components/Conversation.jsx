@@ -19,7 +19,7 @@ function Conversation({ conv, handleConv }) {
                                         <PersonIcon />
                                     </Avatar>
                                 </ListItemAvatar>
-                                <ListItemText primary={data.email} />
+                                <ListItemText primary={data.username} secondary={data.email} />
                             </ListItemButton>
                         </ListItem>
                     ))}

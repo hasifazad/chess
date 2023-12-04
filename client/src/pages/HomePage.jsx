@@ -22,6 +22,9 @@ function HomePage() {
     const handleProfile = () => {
         navigate(`/profile/${user.userId}`)
     }
+    const handleQuiz = () => {
+        navigate('/quiz')
+    }
 
     return (
         <>
@@ -32,7 +35,7 @@ function HomePage() {
                         <PlayWithLink />
                         <CreateGame />
                         <Button onClick={handleChat}>social</Button>
-                        <Button disabled>Example</Button>
+                        <Button onClick={handleQuiz}>quiz</Button>
                         <Button onClick={handleProfile}>profile</Button>
                     </Stack>
                 </Grid>
