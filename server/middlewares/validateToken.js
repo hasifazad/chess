@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 
 const validateToken = (req, res, next) => {
     let token, user;
+    "Bearer khfj;lkdsjafkjdsafjl;sdfajkllsdf"
     let authHeader = req.headers.Authorization || req.headers.authorization;
     try {
         if (authHeader && authHeader.startsWith("Bearer")) {

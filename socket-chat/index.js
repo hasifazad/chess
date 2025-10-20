@@ -11,6 +11,7 @@ const io = server(8901, {
 
 let allUsers = []
 const addUser = (userObj) => {
+    console.log(userObj);
     !allUsers.some((user) => user.userId == userObj.userId) && allUsers.push(userObj)
 }
 const removeUser = (socketId) => {
@@ -25,12 +26,17 @@ const findReciever = (recieverId) => {
 }
 
 
+
 io.on("connect", (socket) => {
     console.log('socket connected');
+    console.log(socket.id);
 
     socket.on('userjoining', (userObj) => {
+        console.log(userObj);
+        const headers = socket.handshake.headers;
+        console.log('Headers:', headers);
         addUser(userObj)
-        // console.log(allUsers);
+        console.log(allUsers);
     })
 
     socket.on('departmessage', (msgObj) => {
