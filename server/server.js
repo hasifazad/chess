@@ -31,8 +31,15 @@ app.use(errorHandler)
 const PORT = process.env.PORT || 3002;
 
 
-app.listen(PORT, () => {
+app.listen(PORT, (err) => {
 
-    if (err) console.log(`server listening to the ports ${PORT}`);
+    if (err){
+    
+        console.log(`server listening to the ports ${PORT}`);
+    } else{
+        console.log(`server connected to port ${PORT}`);
+        
+    }
+        
 })
 
